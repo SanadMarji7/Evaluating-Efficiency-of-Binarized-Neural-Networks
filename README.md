@@ -31,7 +31,7 @@ Hout * Wout * (number of filters used on input matrix)
 It is common to insert a Pooling layer in-between successive Convolution layers. Its function is to reduce the spatial size of the matrix to reduce the number of computation and parameters within the network. It operates independently on every depth slice of the input matrix and reduces its size spatially using the “Max” Operation. The resulting output matrix after a “Max-Pool Layer” can be calculated using the same Formula above.
 
 3) The Fully Connected Layer:
-
+After we flatten the resulting matrix after all Convolution, pooling, binarization, batch norm layers we feed the vector into a fully connected layer which makes a prediction for the final output.
 *************************************************************************************************************************
 
 How we calculated the number of operations for a CNN?
