@@ -1,6 +1,13 @@
 # CNN-number-of-operations-python-tool
 we have created a python tool, which calculates how many additions, multiplications, subtractions, and divisions take place within on iteration of a Convolutional neural network (forward and backward pass)
 
+How to use the Tool:
+Simply insert the CNN model architecture found at the end of the python file named "CNNOperations"
+we provided two examples of the VGG3 and VGG7 model architectures.
+
+*************************************************************************************************************************
+simple explanations for how we developed the tool:
+
 CNN Forward Propagation:
 During the Forward Propagation of CNN’s, the weights, biases and filters are randomly initialized. Within the hidden layers in a CNN features are being extracted and this can be broken down into three parts:
 1.	The Convolution layers: Extracts features from the input.
