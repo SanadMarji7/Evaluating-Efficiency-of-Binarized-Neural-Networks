@@ -24,7 +24,7 @@ It is common to insert a Pooling layer in-between successive Convolution layers.
 
 3) The Fully Connected Layer:
 
-**************************************************************************8
+*************************************************************************************************************************
 
 How we calculated the number of operations for a CNN?
 
