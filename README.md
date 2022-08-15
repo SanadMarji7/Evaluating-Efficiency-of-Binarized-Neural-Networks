@@ -1,7 +1,7 @@
 # CNN-number-of-operations-python-tool
 we have created a python tool, which calculates how many additions, multiplications, subtractions, and divisions take place within on iteration of a Convolutional neural network (forward and backward pass)
 
-How to use the Tool:
+How to use the Tool? 
 Simply insert the CNN model architecture found at the end of the python file named "CNNOperations"
 we provided two examples of the VGG3 and VGG7 model architectures.
 
