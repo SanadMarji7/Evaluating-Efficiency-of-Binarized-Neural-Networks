@@ -3,8 +3,8 @@ we have created a python tool, which calculates how many additions, multiplicati
 
 How to use the Tool? 
 
-Simply insert the CNN model architecture found at the end of the python file named "CNNOperations"
-we provided two examples of the VGG3 and VGG7 model architectures.
+Simply insert the CNN model architecture found at the end of the python file named "CNNOperations" or "FCOperations"
+we provided two examples of the VGG3 and VGG7 model architectures for CNN tool and one FC architecture for fully connected tool.
 
 *************************************************************************************************************************
 simple explanations for how we developed the tool:
