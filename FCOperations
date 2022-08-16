@@ -1,0 +1,95 @@
+# Python Program to approximate number of operations in a Fully-connected Neural Network
+from glob import glob
+
+
+totalMul = 0
+totalDIV = 0
+totalSUB = 0
+totalAdd = 0
+totalComp = 0
+
+def forwardProp(NN):
+    global totalAdd, totalMul, totalDIV, totalSUB
+    MUL = 0
+    ADD = 0
+ 
+    for x in range(len(NN) - 1):
+        MUL = MUL + (NN[x]*NN[x+1])
+    ADD = MUL    
+
+    totalMul = totalMul + MUL
+    totalAdd = totalAdd + ADD
+    
+def backProp(NN): 
+    global totalAdd, totalMul, totalDIV, totalSUB
+    numWeights = 0
+    numBias = 0
+    MULop = 0
+    DIVop = 0
+    ADDop = 0
+    SUBop = 0
+
+    for x in range(len(NN) - 1):
+        numWeights = numWeights + (NN[x]*NN[x+1])
+    for x in range(len(NN)):
+        numBias = numBias + (NN[x])
+
+    #for dl/dw 
+    MULop = MULop + (numWeights * 2)
+
+    #for dl/db
+    MULop = MULop + numBias
+
+    #for calculating the MSE (cost/error)
+    DIVop = DIVop + NN[len(NN) - 1]
+    MULop = MULop + NN[len(NN) - 1]
+    ADDop = ADDop + NN[len(NN) - 1] - 1
+    SUBop = SUBop + NN[len(NN) - 1]
+
+    totalMul = totalMul + MULop
+    totalAdd = totalAdd + ADDop
+    totalDIV = totalDIV + DIVop
+    totalSUB = totalSUB + SUBop
+
+    updateWeightBias(NN)
+
+
+#approximates how many weight and bias updates take place, w <- w - lambda*(dl/dw)
+def updateWeightBias(NN):
+    global totalAdd, totalMul, totalDIV, totalSUB
+    numWeights = 0
+    numBias = 0
+    MULop = 0
+    SUBop = 0
+
+    for x in range(len(NN) - 1):
+        numWeights = numWeights + (NN[x]*NN[x+1])
+    for x in range(len(NN)):
+        numBias = numBias + (NN[x])
+
+    #for learning rate multiplication 
+    MULop = MULop + numWeights
+    MULop = MULop + numBias
+
+    #for calculating the MSE (cost/error)
+    SUBop = SUBop + numWeights
+    SUBop = SUBop + numBias
+
+    totalMul = totalMul + MULop
+    totalSUB = totalSUB + SUBop
+
+    
+
+#approximates number of comparisons resulted from BatchNorm on given Neural networl
+def BatchNorm(NN):
+    print("not implemented yet")
+
+#input FC architecture here
+test = [64, 2048, 10]
+forwardProp(test)
+backProp(test)
+print("total mul operations := ", totalMul)
+print("total add operations := ", totalAdd)
+print("total sub operations := ", totalSUB)
+print("total div operations := ", totalDIV)
+
