@@ -77,3 +77,7 @@ As for the backward Propagation:
 What remains is once again the number of subtractions and multiplications resulting from updating the weights and biases:
 B = B - α ∂L/(∂B_i)   ,W = W - α ∂L/(∂W_i)   
 
+*************************************************************************************************************************
+
+Evaluating BNN Architecture:
+
