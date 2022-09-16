@@ -80,4 +80,52 @@ B = B - α ∂L/(∂B_i)   ,W = W - α ∂L/(∂W_i)
 *************************************************************************************************************************
 
 Evaluating BNN Architecture:
+Energy Power Latency for Binarized VGG3 architecture:\\
+FP latency = 6.360788000000001e-06\\
+FP Energy = 2558.9759999999997\\
+FP Area = 12352\\
+total latency of model:=  0.000717605556\\
+total Energy of model:=  713803.744\\
+total Area of model:=  39063763456  LUT's\\
+
+
+\noindent Energy Power Latency for Binarized VGG7 architecture:\\
+FP latency = 0.00028540313600000004
+FP Energy = 114819.072\\
+FP Area = 12352\\
+total latency of model:=  0.019605149088\\
+total Energy of model:=  19434565.024\\
+total Area of model:=  1061099905408  LUT's \\\\
+
+
+\noindent We have a workload given and the workload is in matrix form, there are alpha entries(rows) and beta columns where alpha is the number of neurons while beta is the number of weights which describe the weight matrix. As for the input matrix which has beta elements as rows and delta elements as columns.
+
+\noindent In the case of BNN’s we take the design(from somar. Q: How can we link it to the paper?) as a reference to look at a BNN implementation on an FPGA.
+
+\noindent We consider only one column with 64 Xnor gates. And push the workload to be accelerated on the crossbar array. This would mean that each row in our workload goes to one crossbar column and that is why we need to multiply everything by alpha.\\
+
+\noindent Suppose we are looking at energy:\\
+
+E = $\sum_{n=0}^{n} (\alpha * \lceil \frac{\beta}{64} \rceil * \delta * E_{1})$ where n is the number of layers in CNN\\
+
+\noindent After analyzing the energy E of one crossbar column we get $E_{1}$ = 0.012(from vivado). it is clear that if we have alpha neurons we have to use alpha columns because the rule is that each neuron is always mapped to one column and this is why we have alpha as a factor.
+As for beta which is the number of weights and since the crossbar is limited (we can only load 64 weights at once) and If we suppose beta was 128 bits we then need to load beta twice since the number of Xnor gates is limited to 64. Which is why beta is divided by 64 in the equation due to our architecture assumption (crossbar is 64).
+Afterwards we need to multiply by delta because each input is applied and to take every input into consideration.\\
+
+
+\noindent Suppose we want to Analyze Latency of the model:\\
+
+L = $\sum_{n=0}^{n} (\lceil \frac{\alpha}{64} \rceil * \lceil \frac{\beta}{64} \rceil * \delta * L_{1})$ where n is the number of layers in CNN\\
+
+\noindent it is dissimilar to how we calculated total Energy of the model. For the Latency we need a different assumption where we have (64 columns X 64 rows) but the speed is actually the same since they should be able to run in parallel (analysis of Latency using vivado $L_{1} = 1.909*(10^{-9})$).
+We also need to be careful with alpha, if we suppose we have 128 neurons then not all of them can fit in the crossbar since we can only work with 64 and so we need to use the crossbar 2 times. And that is why we divide alpha by the number of columns(which due to our assumption is 64).\\
+
+\noindent As for the Area:\\
+
+A = $ A_{1} * 64 $\\
+
+\noindent It is quite simply just the analyzed area of one column (193 LUT's) multiplied by 64 (once again due to our assumption). Since the number of columns and rows is fixed.
+\\
+
+\noindent The above calculations can only be applied to the forward pass of the model since Binarization cannot be applied to the Backward Propagation process. in order to include those numbers within our results we simply used the python tool to calculate the Energy, Latency and Area consumed by the Backward propagation separately and added them together to get the results at the beginning of the section.
 
