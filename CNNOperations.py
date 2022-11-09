@@ -82,7 +82,6 @@ def cnnBackProp(CNN):
     
     #the next two lines are used for "EvaluatingBNN.py"
     total = totalAdd + totalMul + totalSUB
-    print(total)
     return total
     
 # approximates the number of multiplications/additions of dL/dK of one kernel/filter
@@ -243,7 +242,7 @@ def updateWeightBias(NN):
     
 #Parent function which is meant to be called from the user.
 def approximateNumberOfOperations(networkArchitecture):
-    #cnnForwardProp(networkArchitecture)
+    cnnForwardProp(networkArchitecture)
     cnnBackProp(networkArchitecture)
     print("total mul operations := ", totalMul)
     print("total add operations := ", totalAdd)
@@ -253,7 +252,7 @@ def approximateNumberOfOperations(networkArchitecture):
 ###########################################################################################################################################
 ##############################     input CNN architecture here     ##############################
 ##   0  element: initial input size                                                            ##
-##   1  element: True when layer is convolution false when pooling,                            ##
+##   1  element: True when layer is convolution false when pooling, index corresponds to layer ##
 ##   2  element: number of filters used at each corresponding convolution layer                ##
 ##   3  element: convolution Stride                                                            ##
 ##   4  element: convolution padding                                                           ##
