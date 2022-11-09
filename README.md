@@ -80,4 +80,6 @@ B = B - α ∂L/(∂B_i)   ,W = W - α ∂L/(∂W_i)
 *************************************************************************************************************************
 
 Evaluating BNN Architecture:
-found in Tables.pdf (still draft)
+results compared to use of old equations
+![image](https://user-images.githubusercontent.com/74622693/200861519-ff17e0c4-4c80-49c9-84af-f789327a2e5e.png)
+
