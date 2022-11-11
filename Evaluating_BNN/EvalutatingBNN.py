@@ -36,7 +36,7 @@ def BNNForwardProp(alphaBetaDeltaValues, m):
     latency = 0
     energy = 0
     sum_m = 0
-    for i in range(1, m+1):
+    for i in range(0, m):
         sum_m = sum_m + (0.5**i)
     sum_m = 1
     for value in alphaBetaDeltaValues:
